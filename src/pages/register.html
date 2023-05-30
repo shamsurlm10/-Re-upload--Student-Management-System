@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Document</title>
+
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../styles/index.css" />
+    </head>
+
+    <body>
+        <nav class="navbar nav-custom" style="background-color: rgb(1, 36, 49)">
+            <ul class="nav navbar-nav" style="height: 80px">
+                <li>
+                    <a href="../../index.html"><h4>Home</h4></a>
+                </li>
+                <li>
+                    <a href="./list.html"><h4>Students Info</h4></a>
+                </li>
+                <li>
+                    <a href="t&c.html"><h4>Terms & Conditions</h4></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 80px">
+                <li>
+                    <a href="./login.html" id="logout"><h4>Log In</h4></a>
+                </li>
+            </ul>
+        </nav>
+        <form id="register-form">
+            <div
+                class="container"
+                style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                "
+            >
+                <div class="thumbnail" style="width: 500px">
+                    <h2 style="text-align: center">Registration</h2>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="username"
+                            placeholder="Enter Username"
+                        />
+                        <div id="usernameError" class="text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter Email"
+                        />
+                        <div id="emailError" class="text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Password"
+                        />
+                        <div id="passwordError" class="text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="confirmPassword"
+                            placeholder="Confirm Password"
+                        />
+                        <div id="confirmPasswordError" class="text-danger"></div>
+                    </div>
+                    <div class="form-group flex-container">
+                        <div class="radio flex-child">
+                            <label style="padding: 5px"
+                                ><input
+                                    type="checkbox"
+                                    name="agree"
+                                    id="agree"
+                                    value="agree"
+                                    required
+                                /><b
+                                    style="
+                                        font-weight: 400;
+                                        color: rgba(0, 0, 0, 0.989);
+                                    "
+                                >
+                                    I agree with terms and condition</b
+                                ></label
+                            >
+                        </div>
+                        <a href="t&c.html" target="”_blank”"
+                            ><u>Terms & Conditions</u></a
+                        >
+                        <div class="flex-child">
+                            <a href="./login.html">
+                                <h5>Already have an account?</h5>
+                            </a>
+                        </div>
+                    </div>
+                    <button
+                        type="submit"
+                        class="btn btn-block btn-primary"
+                        id="submitRegisterButton"
+                    >
+                        Register
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Importing JS Files -->
+        <script src="../js/register.js"></script>
+    </body>
+</html>

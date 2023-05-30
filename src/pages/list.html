@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Document</title>
+
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../styles/index.css" />
+        <link rel="stylesheet" href="../styles/list.css" />
+    </head>
+
+    <body>
+        <nav class="navbar nav-custom" style="background-color: rgb(1, 36, 49)">
+            <ul class="nav navbar-nav" style="height: 80px">
+                <li>
+                    <a href="../../index.html"><h4>Home</h4></a>
+                </li>
+                <li>
+                    <a href="list.html"><h4>Students Info</h4></a>
+                </li>
+                <li>
+                    <a href="t&c.html"><h4>Terms & Conditions</h4></a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 80px">
+                <li>
+                    <a href="log.html" id="logout"><h4>Logout</h4></a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="jumbotron" style="height: 130px">
+                <div class="form-group flex-child">
+                    <h2>Search<br /></h2>
+                    <div id="searchDiv">
+                        <div class="flex-container">
+                            <div
+                                class="form-group flex-child"
+                                style="margin-left: 5px"
+                            >
+                                <!-- <button class="form-group flex-child" style="height: 33px; background-color:rgb(1, 30, 49);color: white;" onclick="closeSearchDiv()">Close Advanced Search</button> -->
+                                <select id="searchProgram" name="searchProgram">
+                                    <option value="">Search By Program</option>
+                                    <option value="Under-graduation">
+                                        Under-graduation
+                                    </option>
+                                    <option value="Post-graduation">
+                                        Post-graduation
+                                    </option>
+                                    <option value="Research Assistant">
+                                        Research Assistant
+                                    </option>
+                                </select>
+                            </div>
+                            <div
+                                class="form-group flex-child"
+                                style="margin-left: 5px"
+                            >
+                                <!-- <button class="form-group flex-child" style="height: 33px; background-color:rgb(1, 30, 49);color: white;" onclick="closeSearchDiv()">Close Advanced Search</button> -->
+                                <select id="searchMajor" name="searchMajor">
+                                    <option value="">Search By Major</option>
+                                    <option value="Computer Science">
+                                        Computer Science
+                                    </option>
+                                    <option
+                                        value="Electrical and Electronics Engineering"
+                                    >
+                                        Electrical and Electronics Engineering
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div
+                                class="form-group flex-child"
+                                style="
+                                    margin-right: 10px;
+                                    margin-top: 5px;
+                                    white-space: nowrap;
+                                    padding: 5px;
+                                "
+                            >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="gender"
+                                        id="searchMaleRadio"
+                                        value="Male"
+                                        style="
+                                            margin-left: 10px;
+                                            margin-right: 5px;
+                                        "
+                                    />Male</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="gender"
+                                        id="searchFemaleRadio"
+                                        value="Female"
+                                        style="
+                                            margin-left: 10px;
+                                            margin-right: 5px;
+                                        "
+                                    />Female</label
+                                >
+                                <label
+                                    ><input
+                                        type="radio"
+                                        name="gender"
+                                        id="searchOtherRadio"
+                                        value="Other"
+                                        style="
+                                            margin-left: 10px;
+                                            margin-right: 5px;
+                                        "
+                                    />Other</label
+                                >
+                            </div>
+
+                            <div class="form-group flex-child">
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="searchId"
+                                    style="width: 165px; height: 44px"
+                                    placeholder="Search By ID"
+                                />
+                            </div>
+                            <div class="form-group flex-child">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="searchUser"
+                                    style="
+                                        width: 165px;
+                                        height: 44px;
+                                        margin-left: 5px;
+                                        margin-right: 5px;
+                                    "
+                                    placeholder="Search By Name"
+                                />
+                            </div>
+                            <button
+                                type="advanceSearch"
+                                class="form-group flex-child"
+                                style="
+                                    width: 58px;
+                                    height: 44px;
+                                    background-color: rgb(1, 30, 49);
+                                    color: white;
+                                "
+                                id="advanceSearch"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                    <!-- <input type="button" id="showButton" name="searchDiv" value="Advanced Search" style="margin-left: 5px; height: 33px; " onclick="showSearchDiv()" /> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Student Table</h1>
+            <table class="table" id="student-table">
+                <thead id="student-table-head">
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Id</th>
+                        <th>Enrollment Date</th>
+                        <th>Gender</th>
+                        <th>Program</th>
+                        <th>Major</th>
+                        <th>Extra-curriculum</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="student-table-body"></tbody>
+            </table>
+            <div id="pagination-container" class="pagination"></div>
+        </div>
+        <div id="confirmationModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this row?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            data-dismiss="modal"
+                        >
+                            No
+                        </button>
+                        <button
+                            id="deleteConfirmButton"
+                            type="button"
+                            class="btn btn-danger"
+                        >
+                            Yes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="updateModal"
+            class="modal fade"
+            role="dialog"
+            data-backdrop="static"
+            data-keyboard="false"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Here</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="student-update-form">
+                            <div class="form-group">
+                                <label for="user">Name:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="user"
+                                    placeholder="Enter Name"
+                                />
+                                <div id="usernameError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="address"
+                                    placeholder="Address"
+                                />
+                                <div id="addressError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="city"
+                                    placeholder="City"
+                                />
+                                <div id="cityError" class="text-danger"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="country">Country:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="country"
+                                    placeholder="Country"
+                                />
+                                <div id="countryError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="parent"
+                                    >Parent/Guardian Name:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="parent"
+                                    placeholder="Enter Parent/Guardian Name"
+                                />
+                                <div id="parentError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="phone"
+                                    placeholder="Enter Phone Number"
+                                />
+                                <div id="phoneError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Student Email:</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    placeholder="Enter Email"
+                                />
+                                <div id="emailError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sid">Student ID:</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="sid"
+                                    placeholder="Student ID"
+                                />
+                                <div id="sidError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bdate">Date of Birth:</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="bdate"
+                                />
+                                <div id="bdateError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="endate">Date of Enrollment:</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="endate"
+                                />
+                                <div id="endateError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label style="margin-bottom: 0"
+                                    >Select Gender</label
+                                >
+                                <div class="radio">
+                                    <label
+                                        ><input
+                                            type="radio"
+                                            name="gender"
+                                            id="maleRadio"
+                                            value="Male"
+                                        />Male</label
+                                    >
+                                </div>
+                                <div class="radio">
+                                    <label
+                                        ><input
+                                            type="radio"
+                                            name="gender"
+                                            id="femaleRadio"
+                                            value="Female"
+                                        />Female</label
+                                    >
+                                </div>
+                                <div class="radio">
+                                    <label
+                                        ><input
+                                            type="radio"
+                                            name="gender"
+                                            id="otherRadio"
+                                            value="Other"
+                                        />Other</label
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 10px">
+                                <select id="program" name="program">
+                                    <option value="Under-graduation">
+                                        Under-graduation
+                                    </option>
+                                    <option value="Post-graduation">
+                                        Post-graduation
+                                    </option>
+                                    <option value="Research Assistant">
+                                        Research Assistant
+                                    </option>
+                                </select>
+                                <div id="programError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label style="margin-bottom: 0"
+                                    >Marital Status</label
+                                >
+                                <div class="radio">
+                                    <label
+                                        ><input
+                                            type="radio"
+                                            name="marital"
+                                            id="marriedRadio"
+                                            value="Married"
+                                        />Married</label
+                                    >
+                                    <div id="maritalError" class="text-danger"></div>
+                                </div>
+                                <div class="radio">
+                                    <label
+                                        ><input
+                                            type="radio"
+                                            name="marital"
+                                            id="unmarriedRadio"
+                                            value="Unmarried"
+                                        />Unmarried</label
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select id="major" name="major">
+                                    <option value="Computer Science">
+                                        Computer Science
+                                    </option>
+                                    <option
+                                        value="Electrical and Electronics Engineering"
+                                    >
+                                        Electrical and Electronics Engineering
+                                    </option>
+                                </select>
+                                <div id="majorError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label style="margin-top: 10px"
+                                    >Extra-curriculum Activity</label
+                                >
+                                <br />
+                                <label class="checkbox-inline"
+                                    ><input
+                                        type="checkbox"
+                                        value="Sports"
+                                        id="sports"
+                                    />Sports</label
+                                >
+                                <label class="checkbox-inline"
+                                    ><input
+                                        type="checkbox"
+                                        value="Art"
+                                        id="art"
+                                    />Art</label
+                                >
+                                <label class="checkbox-inline"
+                                    ><input
+                                        type="checkbox"
+                                        value="Entertainment"
+                                        id="enter"
+                                    />Entertainment</label
+                                >
+                                <div id="extraError" class="text-danger"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <textarea
+                                    class="form-control"
+                                    id="comment"
+                                    rows="3"
+                                    placeholder="write..."
+                                    style="height: 48px"
+                                ></textarea>
+                                <div id="commentError" class="text-danger"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            id="cancel"
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            id="updateConfirmButton"
+                            type="button"
+                            class="btn btn-danger"
+                        >
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Importing JS Files -->
+        <script src="../js/list.js"></script>
+    </body>
+</html>

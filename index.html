@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./src/styles/index.css">
+</head>
+
+<body>
+    <nav class="navbar nav-custom" style="background-color: rgb(1, 36, 49);">
+        <ul class="nav navbar-nav" style="height: 80px; ">
+            <li><a href="./index.html">
+                    <h4>Home</h4>
+                </a></li>
+            <li><a href="./src/pages/list.html">
+                    <h4>Students Info</h4>
+                </a></li>
+            <li><a href="t&c.html">
+                    <h4>Terms & Conditions</h4>
+                </a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 80px;">
+            <li><a href="./src/pages/login.html" id="logout">
+                    <h4>Logout</h4>
+                </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron" style="height: 130px; display: flex;">
+            <img style="margin-right: 10px; height: 60px;"
+                src="https://static.vecteezy.com/system/resources/thumbnails/000/350/111/small/Education__28193_29.jpg"
+                alt="">
+            <div>
+                <h2>Student Management System</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="thumbnail">
+            <form id="student-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="user">Name:</label>
+                            <input type="text" class="form-control" id="user" placeholder="Enter Name">
+                            <div id="usernameError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="address" placeholder="Address">
+                            <div id="addressError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <input type="text" class="form-control" id="city" placeholder="City">
+                            <div id="cityError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="country">Country:</label>
+                            <input type="text" class="form-control" id="country" placeholder="Country">
+                            <div id="countryError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="parent">Parent/Guardian Name:</label>
+                            <input type="text" class="form-control" id="parent" placeholder="Enter Parent/Guardian Name">
+                            <div id="parentError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number">
+                            <div id="phoneError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="email">Student Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                            <div id="emailError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="sid">Student ID:</label>
+                            <input type="number" class="form-control" id="sid" placeholder="Student ID">
+                            <div id="sidError" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="bdate">Date of Birth:</label>
+                            <input type="date" class="form-control" id="bdate">
+                            <div id="bdateError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="endate">Date of Enrollment:</label>
+                            <input type="date" class="form-control" id="endate">
+                            <div id="endateError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" style="margin-bottom: 0;">Select Gender</label>
+                            <div class="radio">
+                                <label><input type="radio" name="gender" id="maleRadio" value="Male">Male</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="gender" id="femaleRadio" value="Female">Female</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="gender" id="otherRadio" value="Other">Other</label>
+                            </div>
+                            <div id="genderError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label style="margin-bottom: 0;">Marital Status</label>
+                            <div class="radio">
+                                <label><input type="radio" name="marital" id="marriedRadio" value="Married">Married</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="marital" id="unmarriedRadio"
+                                        value="Unmarried">Unmarried</label>
+                            </div>
+                            <div id="maritalError" class="text-danger"></div>
+                        </div>
+    
+                        <div class="form-group" style="margin-top: 10px;">
+                            <select id="program" name="program" style="width: 350px;">
+                                <option value="">Select program to enroll</option>
+                                <option value="Under-graduation">Under-graduation</option>
+                                <option value="Post-graduation">Post-graduation</option>
+                                <option value="Research Assistant">Research Assistant</option>
+                            </select>
+                            <div id="programError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <select id="major" name="major" style="width: 350px;">
+                                <option value="">Select Major</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Electrical and Electronics Engineering">Electrical and Electronics
+                                    Engineering</option>
+                            </select>
+                            <div id="majorError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label style="margin-top: 10px;">Extra-curriculum Activity</label> <br>
+                            <label class="checkbox-inline"><input type="checkbox" value="Sports" id="sports">Sports</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="Art" id="art">Art</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="Entertainment"
+                                    id="enter">Entertainment</label>
+                            <div id="extraError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea class="form-control" id="comment" rows="3" placeholder="write..."
+                                style="height: 39px;"></textarea>
+                            <div id="commentError" class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <button style="width: 50%; margin-left: 51%;" type="submit" class="btn btn-block btn-primary"
+                    id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <footer style="margin-top: 10px;">
+        <div class="container">
+            <h5>Created By</h5>
+            Md Shamsur Rahman
+            <p>All rights reserved 2023</p>
+        </div>
+        </div>
+    </footer>
+
+    <!-- Importing JS Files -->
+    <script src="./src/js/index.js"></script>
+</body>
+
+</html>
