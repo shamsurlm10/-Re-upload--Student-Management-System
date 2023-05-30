@@ -12,8 +12,8 @@ const main = () => {
         'student-table-search-body'
     );
 
-    const rowsPerPage = 4;
-    const currentPage = 1;
+    var rowsPerPage = 4;
+    var currentPage = 1;
 
     document.getElementById('logout').addEventListener('click', (e) => {
         e.preventDefault();
@@ -509,6 +509,7 @@ const main = () => {
             button.innerHTML = i;
             button.addEventListener('click', function (event) {
                 var pageNumber = parseInt(event.target.innerHTML);
+                console.log(pageNumber)
                 currentPage = pageNumber;
                 displayRowsForPage(currentPage, data);
             });

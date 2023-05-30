@@ -128,6 +128,7 @@ const main = () => {
             localStorage.setItem('studentData', JSON.stringify(newStudentData));
 
             alert('Student saved successfully');
+            window.location.reload();
         } else {
             // TODO: Display error message like login and register
             // TODO: Grab all div (error holder) and change innerText like login and register
@@ -217,7 +218,7 @@ const main = () => {
             } else {
                 commentError.innerText = '';
             }
-            console.log(isValidObj.error); // TODO: remove it
+            console.log(isValidObj.error);
         }
     });
 };
@@ -269,8 +270,8 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
     }
     if (!email) {
         error.email = 'Email is required';
-    } else if (!email.includes('@')) {
-        error.email = 'Email format is not valid';
+    } else if (!email.includes('@') || !email.endsWith('.com')) {
+        error.email = 'Email format is not valid (example@example.com)';
     } else if (email.length <= 5) {
         error.email = 'Length of the email must be greater than 5 characters';
     }
@@ -279,6 +280,8 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
     } else if (!/^[0-9\s]+$/.test(sid)) {
         error.sid =
             'Student Id field can only contain Numeric characters.';
+    } else if (sid <= 0) {
+        error.sid = 'Sid must be greater than 0';
     }
     if (!birthDate) {
         error.birthDate = 'BirthDate is required';
@@ -288,16 +291,25 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
         const age = today.getFullYear() - inputBirthDate.getFullYear();
         const monthDiff = today.getMonth() - inputBirthDate.getMonth();
         const dayDiff = today.getDate() - inputBirthDate.getDate();
-        
+
         if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
         }
 
         if (age < 18) {
             error.birthDate = 'You must be at least 18 years old';
         }
     }
+    
     if (!enrollDate) {
         error.enrollDate = 'EnrollDate is required';
+    } else {
+        const today = new Date();
+        const inputEnrollDate = new Date(enrollDate);
+
+        if (inputEnrollDate < today) {
+            error.enrollDate = 'Enroll date must not be less than the current date';
+        }
     }
     if (!selectedGender) {
         error.selectedGender = 'Gender is required';
