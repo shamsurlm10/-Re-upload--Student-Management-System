@@ -63,6 +63,7 @@ const main = () => {
                     rowIndex + (currentPage - 1) * rowsPerPage;
 
                 const name = document.getElementById('user');
+                console.log(name)
                 const address = document.getElementById('address');
                 const city = document.getElementById('city');
                 const country = document.getElementById('country');
@@ -106,7 +107,7 @@ const main = () => {
                     }
                 }
                 const comment = document.getElementById('comment');
-
+                console.log(name)
                 name.value = data[adjustedIndex].name;
                 address.value = data[adjustedIndex].address;
                 city.value = data[adjustedIndex].city;
@@ -146,6 +147,7 @@ const main = () => {
                 updateConfirmButton.addEventListener('click', function (e) {
                     e.preventDefault();
                     const name = document.getElementById('user').value;
+                    console.log(name)
                     const address = document.getElementById('address').value;
                     const city = document.getElementById('city').value;
                     const country = document.getElementById('country').value;
@@ -330,14 +332,10 @@ const main = () => {
 
                         if (error.selectedGender) {
                             genderError.innerText = error.selectedGender;
-                        } else {
-                            genderError.innerText = '';
                         }
 
                         if (error.selectedMarital) {
                             maritalError.innerText = error.selectedMarital;
-                        } else {
-                            maritalError.innerText = '';
                         }
                         if (error.program) {
                             programError.innerText = error.program;
@@ -448,14 +446,6 @@ const main = () => {
                 }
                 if (!comment) {
                     error.comment = 'Comment is required';
-                }
-                for (let i = 0; i < studentData.length; i++) {
-                    if (studentData[i].sid === sid) {
-                        error.sid = 'Student Id already taken';
-                    }
-                    if (studentData[i].email === email) {
-                        error.email = 'Email already taken';
-                    }
                 }
 
                 return {

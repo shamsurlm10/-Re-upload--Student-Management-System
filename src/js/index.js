@@ -117,8 +117,7 @@ const main = () => {
                 program: program,
                 major: major,
                 extraCurriculum: extraCurriculum,
-                comment: comment,
-                studentData
+                comment: comment
             };
             // clear form
             form.reset()
@@ -156,7 +155,6 @@ const main = () => {
             } else {
                 countryError.innerText = '';
             }
-
             if (error.parent) {
                 parentError.innerText = error.parent;
             } else {
@@ -181,14 +179,10 @@ const main = () => {
             }
 
             if (error.birthDate) {
-                bdateError.innerText = error.bdate;
-            } else {
-                bdateError.innerText = '';
+                bdateError.innerText = error.birthDate;
             }
             if (error.enrollDate) {
                 endateError.innerText = error.enrollDate;
-            } else {
-                endateError.innerText = '';
             }
 
             if (error.selectedGender) {
@@ -288,6 +282,19 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
     }
     if (!birthDate) {
         error.birthDate = 'BirthDate is required';
+    } else {
+        const today = new Date();
+        const inputBirthDate = new Date(birthDate);
+        const age = today.getFullYear() - inputBirthDate.getFullYear();
+        const monthDiff = today.getMonth() - inputBirthDate.getMonth();
+        const dayDiff = today.getDate() - inputBirthDate.getDate();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        }
+
+        if (age < 18) {
+            error.birthDate = 'You must be at least 18 years old';
+        }
     }
     if (!enrollDate) {
         error.enrollDate = 'EnrollDate is required';
