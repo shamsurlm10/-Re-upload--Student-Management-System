@@ -180,9 +180,13 @@ const main = () => {
 
             if (error.birthDate) {
                 bdateError.innerText = error.birthDate;
+            }else {
+                bdateError.innerText = '';
             }
             if (error.enrollDate) {
                 endateError.innerText = error.enrollDate;
+            }else {
+                endateError.innerText = '';
             }
 
             if (error.selectedGender) {
@@ -304,8 +308,8 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
         const today = new Date();
         const inputEnrollDate = new Date(enrollDate);
 
-        if (inputEnrollDate < today) {
-            error.enrollDate = 'Enroll date must not be less than the current date';
+        if (inputEnrollDate >= today) {
+            error.enrollDate = 'Enroll date must be less than the current date';
         }
     }
     if (!selectedGender) {

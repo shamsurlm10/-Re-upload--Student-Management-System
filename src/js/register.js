@@ -102,12 +102,11 @@ const isValid = (username, email, password, confirmPassword, agreeCheckbox, user
 
     if (!email) {
         error.email = 'Email is required';
-    } else if (!email.includes('@')) {
-        error.email = 'Email format is not valid';
+    } else if (!email.includes('@') || !email.endsWith('.com')) {
+        error.email = 'Email format is not valid (example@example.com)';
     } else if (email.length <= 5) {
         error.email = 'Length of the email must be greater than 5 characters';
     }
-
     if (!password) {
         error.password = 'Password is required';
     } else if (password.length <= 5) {
