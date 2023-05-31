@@ -13,9 +13,8 @@ const main = () => {
     const usernameErrorHolder = document.getElementById('usernameError');
     const emailErrorHolder = document.getElementById('emailError');
     const passwordErrorHolder = document.getElementById('passwordError');
-    const confirmPasswordErrorHolder = document.getElementById(
-        'confirmPasswordError'
-    );
+    const confirmPasswordErrorHolder = document.getElementById('confirmPasswordError');
+    const agreeCheckboxError = document.getElementById('agreeCheckboxError');
 
     document
         .getElementById('submitRegisterButton')
@@ -26,12 +25,14 @@ const main = () => {
             const email = emailInputField.value;
             const password = passwordInputField.value;
             const confirmPassword = confirmPasswordInputField.value;
+            const agreeCheckbox = document.getElementById("agree").checked;
 
             const isValidObj = isValid(
                 username,
                 email,
                 password,
                 confirmPassword,
+                agreeCheckbox,
                 userData
             );
 
@@ -76,11 +77,14 @@ const main = () => {
                 } else {
                     confirmPasswordErrorHolder.innerText = '';
                 }
+                if (error.agreeCheckbox) {
+                    agreeCheckboxError.innerText = error.agreeCheckbox;
+                  }
             }
         });
 };
 
-const isValid = (username, email, password, confirmPassword, userData) => {
+const isValid = (username, email, password, confirmPassword, agreeCheckbox, userData) => {
     // const usernameEx = /^[a-zA-Z0-9]+$/;
     // const emailEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -117,6 +121,9 @@ const isValid = (username, email, password, confirmPassword, userData) => {
         error.confirmPassword = 'Confirm password did not matched';
     }
 
+    if (!agreeCheckbox) {
+        error.agreeCheckbox = "You must agree to the terms and conditions";
+      }
     // uniqueness of username and email
     for (let i = 0; i < userData.length; i++) {
         if (userData[i].username === username) {
@@ -126,6 +133,7 @@ const isValid = (username, email, password, confirmPassword, userData) => {
             error.email = 'Email already taken';
         }
     }
+
 
     return {
         validate: Object.keys(error).length > 0 ? false : true,

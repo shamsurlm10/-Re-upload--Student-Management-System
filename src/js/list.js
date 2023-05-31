@@ -3,6 +3,7 @@ const main = () => {
     const studentData = JSON.parse(localStorage.getItem('studentData')) || [];
 
     // grabbing elements
+
     // showing all students
     const data = studentData.filter(
         (std) => std.userId === getLoggedInUserId()
@@ -50,6 +51,10 @@ const main = () => {
                 }
             }
 
+            const checkboxCell = document.createElement('td');
+            const checkbox = document.createElement('input');
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("class", "row-checkbox");
             const updateButtonCell = document.createElement('td');
             const updateButton = document.createElement('button');
             updateButton.classList.add('btn', 'btn-success');
@@ -63,7 +68,6 @@ const main = () => {
                     rowIndex + (currentPage - 1) * rowsPerPage;
 
                 const name = document.getElementById('user');
-                console.log(name)
                 const address = document.getElementById('address');
                 const city = document.getElementById('city');
                 const country = document.getElementById('country');
@@ -107,7 +111,6 @@ const main = () => {
                     }
                 }
                 const comment = document.getElementById('comment');
-                console.log(name)
                 name.value = data[adjustedIndex].name;
                 address.value = data[adjustedIndex].address;
                 city.value = data[adjustedIndex].city;
@@ -147,7 +150,6 @@ const main = () => {
                 updateConfirmButton.addEventListener('click', function (e) {
                     e.preventDefault();
                     const name = document.getElementById('user').value;
-                    console.log(name)
                     const address = document.getElementById('address').value;
                     const city = document.getElementById('city').value;
                     const country = document.getElementById('country').value;
@@ -457,150 +459,163 @@ const main = () => {
             updateButtonCell.appendChild(updateButton);
             row.appendChild(updateButtonCell);
 
-            const deleteButtonCell = document.createElement('td');
-            const deleteButton = document.createElement('button');
-            deleteButton.classList.add('btn', 'btn-danger');
-            deleteButton.style.padding = '5px';
-            deleteButton.textContent = 'Delete';
 
-            deleteButton.addEventListener('click', function () {
-                const row = this.parentNode.parentNode;
-                const rowIndex = Array.from(tableBody.children).indexOf(row);
-                const adjustedIndex =
-                    rowIndex + (currentPage - 1) * rowsPerPage;
-
-                $('#confirmationModal').modal('show');
-
-                const deleteConfirmButton = document.getElementById(
-                    'deleteConfirmButton'
-                );
-
-                deleteConfirmButton.addEventListener('click', function () {
-                    const newStudentData = studentData.filter(
-                        (std) => std.id !== studentRow.id
-                    );
-                    localStorage.setItem(
-                        'studentData',
-                        JSON.stringify(newStudentData)
-                    );
-                    window.location.reload();
-                    $('#confirmationModal').modal('hide');
+            const multiDelete = document.getElementById("multiDelete");
+            multiDelete.addEventListener('click', function () {
+                const checkboxes = document.querySelectorAll(".row-checkbox:checked");
+                checkboxes.forEach(() => {
+                    $('#confirmationModal').modal('show');
+                    const deleteConfirmButton = document.getElementById('deleteConfirmButton');
+                    deleteConfirmButton.addEventListener('click', function(){
+                        const newStudentData = studentData.filter(
+                            (std) => std.id !== studentRow.id
+                        );
+                        localStorage.setItem(
+                            'studentData',
+                            JSON.stringify(newStudentData)
+                        );
+                        window.location.reload();
+                        $('#confirmationModal').modal('hide');
+                    })
                 });
             });
 
-            deleteButtonCell.appendChild(deleteButton);
-            row.appendChild(deleteButtonCell);
+        const deleteButtonCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('btn', 'btn-danger');
+        deleteButton.style.padding = '5px';
+        deleteButton.textContent = 'Delete';
 
-            tableBody.appendChild(row);
-        }
-    };
-
-    function generatePaginationButtons(data) {
-        var totalPages = Math.ceil(data.length / rowsPerPage);
-        var paginationContainer = document.getElementById(
-            'pagination-container'
-        );
-        paginationContainer.innerHTML = '';
-
-        for (var i = 1; i <= totalPages; i++) {
-            var button = document.createElement('button');
-            button.style.margin = '5px';
-            button.classList.add('btn', 'btn-secondary');
-            button.innerHTML = i;
-            button.addEventListener('click', function (event) {
-                var pageNumber = parseInt(event.target.innerHTML);
-                console.log(pageNumber)
-                currentPage = pageNumber;
-                displayRowsForPage(currentPage, data);
+        deleteButton.addEventListener('click', function () {
+            $('#confirmationModal').modal('show');
+            const deleteConfirmButton = document.getElementById('deleteConfirmButton');
+            deleteConfirmButton.addEventListener('click', function () {
+                const newStudentData = studentData.filter(
+                    (std) => std.id !== studentRow.id
+                );
+                localStorage.setItem(
+                    'studentData',
+                    JSON.stringify(newStudentData)
+                );
+                window.location.reload();
+                $('#confirmationModal').modal('hide');
             });
-            paginationContainer.appendChild(button);
-        }
-    }
-
-    document
-        .getElementById('advanceSearch')
-        .addEventListener('click', function () {
-            var majorSearch = document.getElementById('searchMajor').value;
-            var programSearch = document.getElementById('searchProgram').value;
-
-            var maleRadio = document.getElementById('searchMaleRadio');
-            var femaleRadio = document.getElementById('searchFemaleRadio');
-            var otherRadio = document.getElementById('searchOtherRadio');
-
-            var selectedGenderFilter = '';
-
-            if (maleRadio.checked) {
-                selectedGenderFilter = maleRadio.value;
-            } else if (femaleRadio.checked) {
-                selectedGenderFilter = femaleRadio.value;
-            } else if (otherRadio.checked) {
-                selectedGenderFilter = otherRadio.value;
-            }
-
-            var searchId = document.getElementById('searchId').value;
-            var searchUser = document.getElementById('searchUser').value;
-
-            var filteredData = data.filter(function (student) {
-                if (
-                    majorSearch &&
-                    student.major
-                        .toLowerCase()
-                        .indexOf(majorSearch.toLowerCase()) === -1
-                ) {
-                    return false;
-                }
-                if (
-                    programSearch &&
-                    student.program
-                        .toLowerCase()
-                        .indexOf(programSearch.toLowerCase()) === -1
-                ) {
-                    return false;
-                }
-                if (
-                    selectedGenderFilter &&
-                    student.selectedGender !== selectedGenderFilter
-                ) {
-                    return false;
-                }
-                if (
-                    searchId &&
-                    student.sid
-                        .toLowerCase()
-                        .indexOf(searchId.toLowerCase()) === -1
-                ) {
-                    return false;
-                }
-                if (
-                    searchUser &&
-                    student.name
-                        .toLowerCase()
-                        .indexOf(searchUser.toLowerCase()) === -1
-                ) {
-                    return false;
-                }
-                return true;
-            });
-
-            generatePaginationButtons(filteredData);
-            displayRowsForPage(1, filteredData);
-
-            maleRadio.checked = false;
-            femaleRadio.checked = false;
-            otherRadio.checked = false;
         });
 
-    document.getElementById('cancel').addEventListener('click', function () {
-        window.location.reload();
+        deleteButtonCell.appendChild(deleteButton);
+        row.appendChild(deleteButtonCell);
+        checkboxCell.appendChild(checkbox);
+        row.appendChild(checkboxCell)
+
+        tableBody.appendChild(row);
+    }
+};
+
+function generatePaginationButtons(data) {
+    var totalPages = Math.ceil(data.length / rowsPerPage);
+    var paginationContainer = document.getElementById(
+        'pagination-container'
+    );
+    paginationContainer.innerHTML = '';
+
+    for (var i = 1; i <= totalPages; i++) {
+        var button = document.createElement('button');
+        button.style.margin = '5px';
+        button.classList.add('btn', 'btn-secondary');
+        button.innerHTML = i;
+        button.addEventListener('click', function (event) {
+            var pageNumber = parseInt(event.target.innerHTML);
+            currentPage = pageNumber;
+            displayRowsForPage(currentPage, data);
+        });
+        paginationContainer.appendChild(button);
+    }
+}
+
+document
+    .getElementById('advanceSearch')
+    .addEventListener('click', function () {
+        var majorSearch = document.getElementById('searchMajor').value;
+        var programSearch = document.getElementById('searchProgram').value;
+
+        var maleRadio = document.getElementById('searchMaleRadio');
+        var femaleRadio = document.getElementById('searchFemaleRadio');
+        var otherRadio = document.getElementById('searchOtherRadio');
+
+        var selectedGenderFilter = '';
+
+        if (maleRadio.checked) {
+            selectedGenderFilter = maleRadio.value;
+        } else if (femaleRadio.checked) {
+            selectedGenderFilter = femaleRadio.value;
+        } else if (otherRadio.checked) {
+            selectedGenderFilter = otherRadio.value;
+        }
+
+        var searchId = document.getElementById('searchId').value;
+        var searchUser = document.getElementById('searchUser').value;
+
+        var filteredData = data.filter(function (student) {
+            if (
+                majorSearch &&
+                student.major
+                    .toLowerCase()
+                    .indexOf(majorSearch.toLowerCase()) === -1
+            ) {
+                return false;
+            }
+            if (
+                programSearch &&
+                student.program
+                    .toLowerCase()
+                    .indexOf(programSearch.toLowerCase()) === -1
+            ) {
+                return false;
+            }
+            if (
+                selectedGenderFilter &&
+                student.selectedGender !== selectedGenderFilter
+            ) {
+                return false;
+            }
+            if (
+                searchId &&
+                student.sid
+                    .toLowerCase()
+                    .indexOf(searchId.toLowerCase()) === -1
+            ) {
+                return false;
+            }
+            if (
+                searchUser &&
+                student.name
+                    .toLowerCase()
+                    .indexOf(searchUser.toLowerCase()) === -1
+            ) {
+                return false;
+            }
+            return true;
+        });
+
+        generatePaginationButtons(filteredData);
+        displayRowsForPage(1, filteredData);
+
+        maleRadio.checked = false;
+        femaleRadio.checked = false;
+        otherRadio.checked = false;
     });
 
-    // Function to initialize the student table and pagination
-    function initializeStudentTable() {
-        generatePaginationButtons(data);
-        displayRowsForPage(currentPage, data);
-    }
+document.getElementById('cancel').addEventListener('click', function () {
+    window.location.reload();
+});
 
-    initializeStudentTable();
+// Function to initialize the student table and pagination
+function initializeStudentTable() {
+    generatePaginationButtons(data);
+    displayRowsForPage(currentPage, data);
+}
+
+initializeStudentTable();
 };
 
 const getLoggedInUserId = () => {

@@ -10,7 +10,6 @@ const main = () => {
     const form = document.getElementById("student-form")
     document.getElementById('submit').addEventListener('click', (e) => {
         e.preventDefault();
-
         // grabbing all input field
         const name = document.getElementById('user').value;
         const address = document.getElementById('address').value;
@@ -288,16 +287,14 @@ const isValid = (name, address, city, country, parent, phone, email, sid,
     } else {
         const today = new Date();
         const inputBirthDate = new Date(birthDate);
-        const age = today.getFullYear() - inputBirthDate.getFullYear();
-        const monthDiff = today.getMonth() - inputBirthDate.getMonth();
-        const dayDiff = today.getDate() - inputBirthDate.getDate();
 
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-            age--;
-        }
+        const yearsDiff = today.getFullYear() - inputBirthDate.getFullYear();
+        const monthsDiff = today.getMonth() - inputBirthDate.getMonth();
+        const daysDiff = today.getDate() - inputBirthDate.getDate();
 
-        if (age < 18) {
-            error.birthDate = 'You must be at least 18 years old';
+        // Check if the person is at least 18 years old
+        if (yearsDiff < 18 || (yearsDiff === 18 && monthsDiff < 0) || (yearsDiff === 18 && monthsDiff === 0 && daysDiff < 0)) {
+            error.birthDate = 'Age must be at least 18 years old';
         }
     }
     
