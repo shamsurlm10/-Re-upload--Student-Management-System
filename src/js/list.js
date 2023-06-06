@@ -280,6 +280,7 @@ const main = () => {
 
 
                         $('#updateModal').modal('hide');
+                        window.location.reload()
                     }
                     else {
                         const error = isValidObj.error;
